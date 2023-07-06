@@ -66,7 +66,10 @@ class LoginScreen extends StatelessWidget {
                                     builder: (context) => const GameScreen()));
                           }).onError((error, stackTrace) {
                             SnackBar(content: Text("Loggedin failed: $error"));
-                          });
+                          }).timeout(const Duration(seconds:30),onTimeout:(){
+                             EasyLoading.dismiss(animation:true);
+                            const SnackBar(content: Text("Session timeout,try again later!"));
+                          } );
                         }
                       },
                       style: ElevatedButton.styleFrom(
